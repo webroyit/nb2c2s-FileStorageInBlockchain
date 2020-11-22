@@ -21,6 +21,14 @@ contract DStorage {
     }
 
     function uploadFile(string memory _fileHash, uint _fileSize, string memory _fileType, string memory _fileName, string memory _fileDescription) public {
+        // Validation (Check the condition, break the function if it false)
+        require(bytes(_fileHash).length > 0);
+        require(bytes(_fileType).length > 0);
+        require(bytes(_fileDescription).length > 0);
+        require(bytes(_fileName).length > 0);
+        require(msg.sender != address(0));
+        require(_fileSize > 0);
+
         fileCount = fileCount + 1;
 
         // now generate a time stamp
