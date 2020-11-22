@@ -17,6 +17,18 @@ contract DStorage {
         address payable uploader;
     }
 
+    // Event
+    event FileUploaded(
+        uint fileId,
+        string fileHash,
+        uint fileSize,
+        string fileType,
+        string fileName,
+        string fileDescription,
+        uint uploadTime,
+        address payable uploader
+    );
+
     constructor() public {
     }
 
@@ -33,5 +45,8 @@ contract DStorage {
 
         // now generate a time stamp
         files[fileCount] = File(fileCount, _fileHash, _fileSize, _fileType, _fileName, _fileDescription, now, msg.sender);
+
+        // Trigger an event
+        emit FileUploaded(fileCount, _fileHash, _fileSize, _fileType, _fileName, _fileDescription, now, msg.sender);
     }
 }
