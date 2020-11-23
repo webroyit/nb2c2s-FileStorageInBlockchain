@@ -5,8 +5,15 @@ import Navbar from './components/Navbar';
 import Main from './components/Main';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      account: '0x0'
+    }
+  }
   async componentWillMount() {
     await this.loadWeb3();
+    await this.loadBlockchainData();
   }
 
   async loadWeb3() {
@@ -22,10 +29,18 @@ class App extends Component {
     }
   }
 
+  async loadBlockchainData() {
+    const web3 = window.web3;
+
+    // Load account
+    const accounts = await web3.eth.getAccounts();
+    this.setState({ account: accounts[0] });
+  }
+
   render() {
     return (
       <div>
-        <Navbar />
+        <Navbar account={this.state.account} />
         <Main />
       </div>
     );

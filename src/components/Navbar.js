@@ -12,7 +12,7 @@ class Navbar extends Component {
             FSIBC
         </a>
         <ul className="navbar-nav px-3">
-          <b className='text-white'>{'0x0'}</b>
+          <b className='text-white'>{this.props.account}</b>
         </ul>
       </nav>
     );
