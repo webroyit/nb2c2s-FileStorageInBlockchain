@@ -1,7 +1,7 @@
 function App() {
   return (
     <div>
-      <h1>File Storage In Blockchain</h1>
+      <h1 className="text-center">File Storage In Blockchain</h1>
     </div>
   );
 }
