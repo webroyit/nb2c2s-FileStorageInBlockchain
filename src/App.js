@@ -1,12 +1,18 @@
-import Navbar from './components/Navbar';
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div>
-      <Navbar />
-      <h1 className="text-center">File Storage In Blockchain</h1>
-    </div>
-  );
+import Navbar from './components/Navbar';
+import Main from './components/Main';
+
+class App extends Component {
+
+  render() {
+    return (
+      <div>
+        <Navbar />
+        <Main />
+      </div>
+    );
+  }
 }
 
 export default App;
