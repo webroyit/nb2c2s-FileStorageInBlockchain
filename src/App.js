@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Web3 from 'web3';
 
+import DStorage from './abis/DStorage.json'
 import Navbar from './components/Navbar';
 import Main from './components/Main';
 
@@ -9,7 +10,10 @@ class App extends Component {
     super(props);
     this.state = {
       account: '',
-      loading: false,
+      dstorage: null,
+      files: [],
+      filesCount: 0,
+      loading: false
     }
   }
   async componentWillMount() {
@@ -36,6 +40,30 @@ class App extends Component {
     // Load account
     const accounts = await web3.eth.getAccounts();
     this.setState({ account: accounts[0] });
+
+    // Network ID
+    const networkId = await web3.eth.net.getId();
+    const networkData = DStorage.networks[networkId];
+
+    if(networkData) {
+      // Assign contract
+      const dstorage = new web3.eth.Contract(DStorage.abi, networkData.address);
+      this.setState({ dstorage });
+
+      // Get files amount
+      const filesCount = await dstorage.methods.fileCount().call();
+      this.setState({ filesCount });
+
+      // Load files and sort by the newest
+      for (let i = filesCount; i >= 1; i--) {
+        const file = await dstorage.methods.files(i).call();
+        this.setState({
+          files: [...this.state.files, file]
+        });
+      }
+    } else {
+      window.alert('This contract not deployed to detected network.');
+    }
   }
 
   render() {
