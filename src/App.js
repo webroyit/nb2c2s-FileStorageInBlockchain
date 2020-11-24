@@ -8,7 +8,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      account: '0x0'
+      account: '0x0',
+      loading: false,
     }
   }
   async componentWillMount() {
@@ -41,7 +42,10 @@ class App extends Component {
     return (
       <div>
         <Navbar account={this.state.account} />
-        <Main />
+        { this.state.loading
+          ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
+          : <Main />
+        }
       </div>
     );
   }
