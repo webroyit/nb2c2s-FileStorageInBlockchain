@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Identicon from 'identicon.js';
 
 class Navbar extends Component {
 
@@ -12,7 +13,27 @@ class Navbar extends Component {
             FSIBC
         </a>
         <ul className="navbar-nav px-3">
-          <b className='text-white'>{this.props.account}</b>
+          <li>
+            <small id="account">
+              <a target="_blank"
+                 alt=""
+                 className="text-white"
+                 rel="noopener noreferrer"
+                 href={"https://etherscan.io/address/" + this.props.account}>
+                {this.props.account.substring(0,6)}...{this.props.account.substring(38,42)}
+              </a>
+            </small>
+            { this.props.account
+              ? <img
+                  alt=""
+                  className='ml-2'
+                  width='30'
+                  height='30'
+                  src={`data:image/png;base64,${new Identicon(this.props.account, 30).toString()}`}
+                />
+              : <span></span>
+            }
+          </li>
         </ul>
       </nav>
     );
