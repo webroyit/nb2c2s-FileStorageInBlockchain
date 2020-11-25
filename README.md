@@ -6,3 +6,4 @@
 ## Packages
 - `identicon.js` to generate random icon
 - `web3` to interact with ethereum node
+- `ipfs-http-client` to work with IPFS

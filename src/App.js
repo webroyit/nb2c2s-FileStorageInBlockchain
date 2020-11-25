@@ -5,6 +5,10 @@ import DStorage from './abis/DStorage.json'
 import Navbar from './components/Navbar';
 import Main from './components/Main';
 
+// Connect to IPFS
+const ipfsClient = require('ipfs-http-client');
+const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
+
 class App extends Component {
   constructor(props) {
     super(props);
