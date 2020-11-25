@@ -17,8 +17,11 @@ class App extends Component {
       dstorage: null,
       files: [],
       filesCount: 0,
+      type: null,
+      name: null,
       loading: false
     }
+    this.captureFile = this.captureFile.bind(this);
   }
   async componentWillMount() {
     await this.loadWeb3();
@@ -70,13 +73,36 @@ class App extends Component {
     }
   }
 
+  // Get file from user and prepare it for upload
+  captureFile = event => {
+    event.preventDefault();
+
+    // Get the file from the form
+    const file = event.target.files[0];
+
+    // Read the file
+    const reader = new window.FileReader();
+
+    // Convert the file into buffer
+    reader.readAsArrayBuffer(file);
+
+    reader.onloadend = () => {
+      this.setState({
+        buffer: Buffer(reader.result),
+        type: file.type,
+        name: file.name
+      });
+      console.log('buffer', this.state.buffer);
+    }
+  }
+
   render() {
     return (
       <div>
         <Navbar account={this.state.account} />
         { this.state.loading
           ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
-          : <Main />
+          : <Main captureFile={this.captureFile} />
         }
       </div>
     );

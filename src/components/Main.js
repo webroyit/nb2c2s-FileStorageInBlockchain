@@ -26,8 +26,8 @@ class Main extends Component {
                       placeholder="Description..."
                       required />
                   </div>
-                  
-                  <input type="file" className="text-white text-monospace"/>
+
+                  <input type="file" onChange={this.props.captureFile} className="text-white text-monospace"/>
                   <button type="submit" className="btn-primary btn-block mt-2"><b>Upload!</b></button>
                 </form>
               </div>
