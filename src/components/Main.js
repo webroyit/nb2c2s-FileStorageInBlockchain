@@ -14,7 +14,7 @@ class Main extends Component {
                 <form onSubmit={(event) => {
                   event.preventDefault();
                   const description = this.fileDescription.value;
-                  console.log(description);
+                  this.props.uploadFile(description);
                 }} >
                   <div className="form-group">
                     <br></br>

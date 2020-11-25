@@ -22,6 +22,7 @@ class App extends Component {
       loading: false
     }
     this.captureFile = this.captureFile.bind(this);
+    this.uploadFile = this.uploadFile.bind(this);
   }
   async componentWillMount() {
     await this.loadWeb3();
@@ -96,13 +97,25 @@ class App extends Component {
     }
   }
 
+  // Upload file
+  uploadFile = description => {
+    // Add file to the IPFS
+    ipfs.add(this.state.buffer, (error, result) => {
+      console.log(result);
+
+      if(error) {
+        console.error(error);
+      }
+    });
+  }
+
   render() {
     return (
       <div>
         <Navbar account={this.state.account} />
         { this.state.loading
           ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
-          : <Main captureFile={this.captureFile} />
+          : <Main captureFile={this.captureFile} uploadFile={this.uploadFile} />
         }
       </div>
     );
