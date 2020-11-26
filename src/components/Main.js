@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { convertBytes } from '../helpers';
+
 class Main extends Component {
 
   render() {
@@ -56,7 +58,7 @@ class Main extends Component {
                           <td>{file.fileName}</td>
                           <td>{file.fileDescription}</td>
                           <td>{file.fileType}</td>
-                          <td>{file.fileSize}</td>
+                          <td>{convertBytes(file.fileSize)}</td>
                           <td>{file.uploadTime}</td>
                           <td>
                             <a
