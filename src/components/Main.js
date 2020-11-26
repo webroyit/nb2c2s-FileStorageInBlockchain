@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 import { convertBytes } from '../helpers';
 
@@ -59,7 +60,7 @@ class Main extends Component {
                           <td>{file.fileDescription}</td>
                           <td>{file.fileType}</td>
                           <td>{convertBytes(file.fileSize)}</td>
-                          <td>{file.uploadTime}</td>
+                          <td>{moment.unix(file.uploadTime).format('M/D/Y h:mm:ss A')}</td>
                           <td>
                             <a
                               href={"https://etherscan.io/address/" + file.uploader}
