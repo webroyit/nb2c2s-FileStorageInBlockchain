@@ -138,7 +138,7 @@ class App extends Component {
         <Navbar account={this.state.account} />
         { this.state.loading
           ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
-          : <Main captureFile={this.captureFile} uploadFile={this.uploadFile} />
+          : <Main files={this.state.files} captureFile={this.captureFile} uploadFile={this.uploadFile} />
         }
       </div>
     );
